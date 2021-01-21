@@ -43,9 +43,9 @@ def random_date():
 def data_insert():
     c.execute("INSERT INTO products VALUES(002, '02-05-2020', 'teclado', 130 )")
     conn.commit()
-    c.close()
-    conn.close()
-    
+ 
+create_table()
+
 # Leitura de dados
 def leitura_todos_dados():
     c.execute("SELECT * FROM products")
@@ -56,13 +56,39 @@ def leitura_todos_dados():
 def leitura_registros():
     c.execute("SELECT * FROM products WHERE valor > 500.0")
     for row in c.fetchall():
-        print(row)
+        print(row)      
         
 # Leitura de colunas específicos
 def leitura_colunas():
     c.execute("SELECT * FROM products")
     for row in c.fetchall():
         print(row[3])
+
+leitura_todos_dados()
+
+# Definindo linhas na tabela
+def contagem_linhas():
+    c.execute("select * from products")
+    results = c.fetchall()
+    n_linhas = len(results)
+    print (len(results))
+
+contagem_linhas()
+
+# Usando variáveis para inserir dados    
+def data_insert_var():
+    new_date = random_date
+    new_prod_name = random.choice('prod')
+    set_valor = new_valor()
+    c.execute("INSERT INTO products (date, prod_name, valor) VALUES (?, ?, ?),'\ "
+              "(new_date, new_prod_name, set_valor))")
+
+# Gerando valores e inserindo na tabela
+while 'n_linhas' < 50:
+    data_insert_var()
+    time.sleep(1)
+
+leitura_todos_dados()
 
 # Update
 def atualiza_dados():
@@ -72,19 +98,6 @@ def atualiza_dados():
 # Delete
 def remove_dados():
     c.execute("DELETE FROM products WHERE valor = 62.0")
-    conn.commit()
-
-# Usando variáveis para inserir dados    
-def data_insert_var():
-    new_date = random_date
-    new_prod_name = random.choice('prod')
-    set_valor = new_valor()
-    c.execute("INSERT INTO products (date, prod_name, valor) VALUES (?, ?, ?), (new_date, new_prod_name, set_valor))"
-              
-# Gerando valores e inserindo na tabela
-while (sum(1 for row in ) < 50):
-    data_insert_var()
-    time.sleep(1)
     conn.commit()
     
 # Encerrando a conexão
