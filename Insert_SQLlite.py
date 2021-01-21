@@ -7,7 +7,7 @@ import os
 os.remove("teste.db") if os.path.exists("teste.db") else None
  
 # Criando uma conexão
-conn = sqlite3.connect("teste.db")   
+conn = sqlite3.connect("D:\Git\PyCharm_Git")
 
 # Criando um cursor
 c = conn.cursor()
