@@ -7,7 +7,7 @@ import os
 # os.remove("teste.db") if os.path.exists("teste.db") else None
  
 # Criando uma conexão
-conn = sqlite3.connect("D:\Git\PyCharm_Git\teste.db")
+conn = sqlite3.connect("teste.db")
 
 # Criando um cursor
 c = conn.cursor()
@@ -80,11 +80,11 @@ def data_insert_var():
     new_date = random_date
     new_prod_name = random.choice('prod')
     set_valor = new_valor()
-    c.execute("INSERT INTO products (date, prod_name, valor) VALUES (?, ?, ?, ?)",
-              (new_date, new_prod_name, new_valor))
+    c.execute("INSERT INTO products (date, prod_name, valor) VALUES (?, ?, ?)",
+              (str(new_date), str(new_prod_name), str(new_valor)))
 
 # Gerando valores e inserindo na tabela
-while 'n_linhas' < 50:
+for i in range(50):
     data_insert_var()
     time.sleep(1)
 
